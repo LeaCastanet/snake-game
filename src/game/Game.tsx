@@ -9,15 +9,15 @@ interface GameProps {}
 const Game: React.FC<GameProps> = ({}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const { snakeBody } = useGameLogic();
+  const { snakeBody, onKeyDownHandler } = useGameLogic();
 
   const drawGame = (ctx: CanvasRenderingContext2D) => {
     draw({ ctx, snakeBody });
   };
 
   return (
-    <GameWrapper>
-      <Canvas draw={drawGame} ref={canvasRef} />
+    <GameWrapper tabIndex={0} onKeyDown={onKeyDownHandler}>
+      <Canvas ref={canvasRef} draw={drawGame} />
     </GameWrapper>
   );
 };
