@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import Canvas from "../canvas/Canvas";
-import { GameWrapper } from "./Game.styles";
+import { GameWrapper, Score } from "./Game.styles";
 import useGameLogic from "./useGameLogic";
 import draw from "../draw/draw";
 
@@ -9,6 +9,7 @@ interface GameProps {}
 export enum GameState {
   RUNNING,
   GAME_OVER,
+  PAUSED,
 }
 
 const Game: React.FC<GameProps> = ({}) => {
@@ -19,8 +20,8 @@ const Game: React.FC<GameProps> = ({}) => {
 
   const { snakeBody, onKeyDownHandler, foodPosition, resetGameState } =
     useGameLogic({
-      canvasHeight: canvasRef.current?.height,
-      canvasWidth: canvasRef.current?.width,
+      canvasHeight: 150,
+      canvasWidth: 300,
       onGameOver,
       gameState,
     });
@@ -42,8 +43,19 @@ const Game: React.FC<GameProps> = ({}) => {
           Play Again
         </button>
       ) : (
-        <button>Pause</button>
+        <button
+          onClick={() => {
+            setGameState(
+              gameState === GameState.RUNNING
+                ? GameState.PAUSED
+                : GameState.RUNNING
+            );
+          }}
+        >
+          {gameState === GameState.RUNNING ? "Pause" : "Play"}
+        </button>
       )}
+      <Score>{`Your score: ${(snakeBody.length - 1) * 10}`}</Score>
     </GameWrapper>
   );
 };
