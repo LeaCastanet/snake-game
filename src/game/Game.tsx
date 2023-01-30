@@ -12,7 +12,7 @@ export enum GameState {
   PAUSED,
 }
 
-const Game: React.FC<GameProps> = ({}) => {
+const Game: React.FC<GameProps> = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [gameState, setGameState] = useState<GameState>(GameState.RUNNING);
 
