@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Canvas from "../canvas/Canvas";
 import { SEGMENT_SIZE } from "../draw/draw";
 import randomPositionOnGrid from "../utils/randomPositionOnGrid";
 import useInterval from "../utils/useInterval";
